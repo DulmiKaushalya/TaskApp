@@ -44,7 +44,7 @@
         android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="135dp"
         />
 
     <EditText
@@ -58,6 +58,6 @@
         android:fontFamily="@font/poppins"
         android:background="@drawable/purple_border"
         android:layout_below="@+id/updateTitleEditText"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="30dp" />
 
 </RelativeLayout>

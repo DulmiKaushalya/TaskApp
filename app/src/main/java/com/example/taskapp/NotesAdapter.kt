@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 
 class NotesAdapter(private var notesList: List<Note>, private val context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
@@ -44,10 +45,28 @@ class NotesAdapter(private var notesList: List<Note>, private val context: Conte
         }
 
         holder.deleteButton.setOnClickListener {
+            // Show confirmation dialog before deletion
+            showDeleteConfirmationDialog(note)
+        }
+    }
+
+    private fun showDeleteConfirmationDialog(note: Note) {
+        // Create an AlertDialog
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Confirm Deletion")
+        builder.setMessage("Do you really want to delete this note?")
+        builder.setPositiveButton("Yes") { dialog, which ->
             db.deleteNote(note.id)
             refreshData(db.getAllNotes()) // Refresh the list after deletion
-            Toast.makeText(holder.itemView.context, "Note Deleted", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Note Deleted", Toast.LENGTH_SHORT).show()
         }
+        builder.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss() // Just dismiss the dialog
+        }
+
+        // Show the dialog
+        val dialog = builder.create()
+        dialog.show()
     }
 
     fun refreshData(newNotes: List<Note>) {
@@ -68,5 +87,4 @@ class NotesAdapter(private var notesList: List<Note>, private val context: Conte
         notesList = filteredList
         notifyDataSetChanged() // Notify the adapter that data has changed
     }
-
 }

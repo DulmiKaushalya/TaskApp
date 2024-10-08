@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt") // Add this line to enable KAPT
 }
+
 
 android {
     namespace = "com.example.taskapp"
@@ -37,14 +39,27 @@ android {
          viewBinding = true
     }
 }
-
 dependencies {
-
+    // Core libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // Room for SQLite database integration
+    implementation("androidx.room:room-runtime:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
+    implementation("androidx.room:room-ktx:2.5.0")
+    // Kotlin Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+
+    // ViewModel and LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.0")
+
+    // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
