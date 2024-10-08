@@ -25,15 +25,15 @@ class NoteDatabaseHelper (context: Context): SQLiteOpenHelper(context,DATABASE_N
         db?.execSQL(dropTableQuery)
         onCreate(db)
     }
-     fun insertNote(note: Note){
-         val db = writableDatabase
-         val values = ContentValues().apply {
-             put(COLUMN_TITLE,note.title)
-             put(COLUMN_CONTENT,note.content)
-         }
-         db.insert(TABLE_NAME,null,values)
-         db.close()
-     }
+    fun insertNote(note: Note){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_TITLE,note.title)
+            put(COLUMN_CONTENT,note.content)
+        }
+        db.insert(TABLE_NAME,null,values)
+        db.close()
+    }
     fun getAllNotes(): List<Note> {
         val notesList = mutableListOf<Note>()
         val db = readableDatabase

@@ -18,11 +18,22 @@
         android:layout_marginStart="18dp"
         android:textColor="@color/purple"
         android:textSize="24sp"/>
+
+    <!-- SearchView for searching notes -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notesHeading"
+        android:layout_marginTop="8dp"
+        android:iconifiedByDefault="false"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/searchView"
+        android:layout_marginTop="8dp"
         android:padding="16dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

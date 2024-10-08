@@ -12,9 +12,9 @@ class UpdateNoteActivity : AppCompatActivity() {
     private var noteId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
-               super.onCreate(savedInstanceState)
-               binding = ActivityUpdateNoteBinding.inflate(layoutInflater)
-               setContentView(binding.root)
+        super.onCreate(savedInstanceState)
+        binding = ActivityUpdateNoteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         db = NoteDatabaseHelper(this)
 
         noteId = intent.getIntExtra("note_id",-1)
@@ -27,7 +27,7 @@ class UpdateNoteActivity : AppCompatActivity() {
         binding.updateContentEditText.setText(note.content)
 
         binding.updateSaveButton.setOnClickListener{
-             val newTitle = binding.updateTitleEditText.text.toString()
+            val newTitle = binding.updateTitleEditText.text.toString()
             val newContent = binding.updateContentEditText.text.toString()
             val updateNote = Note(noteId,newTitle,newContent)
             db.updateNote(updateNote)
