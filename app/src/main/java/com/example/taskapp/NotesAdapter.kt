@@ -18,6 +18,7 @@ class NotesAdapter(private var notesList: List<Note>, private val context: Conte
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
+        val categoryTextView: TextView = itemView.findViewById(R.id.categoryTextView)
         val updateButton: ImageView = itemView.findViewById(R.id.updateButton)
         val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
     }
@@ -33,6 +34,7 @@ class NotesAdapter(private var notesList: List<Note>, private val context: Conte
         val note = notesList[position]
         holder.titleTextView.text = note.title
         holder.contentTextView.text = note.content
+        holder.categoryTextView.text = note.category
 
         holder.updateButton.setOnClickListener {
             val intent = Intent(holder.itemView.context, UpdateNoteActivity::class.java).apply {
@@ -60,10 +62,11 @@ class NotesAdapter(private var notesList: List<Note>, private val context: Conte
         } else {
             fullNotesList.filter {
                 it.title.contains(query, ignoreCase = true) || // Filter by title
-                        it.content.contains(query, ignoreCase = true) // Filter by content
+                        it.category.contains(query, ignoreCase = true) // Filter by category
             }
         }
         notesList = filteredList
         notifyDataSetChanged() // Notify the adapter that data has changed
     }
+
 }

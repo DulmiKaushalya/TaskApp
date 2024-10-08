@@ -1,6 +1,8 @@
 package com.example.taskapp
 
+import android.R
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.taskapp.databinding.ActivityUpdateNoteBinding
@@ -26,10 +28,20 @@ class UpdateNoteActivity : AppCompatActivity() {
         binding.updateTitleEditText.setText(note.title)
         binding.updateContentEditText.setText(note.content)
 
+        // Populate the Spinner with predefined categories
+        val categories = arrayOf("Work", "Personal", "Shopping", "Other")
+        val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, categories)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.categorySpinner.adapter = adapter
+
+        // Set the selected category based on the existing note
+        binding.categorySpinner.setSelection(adapter.getPosition(note.category))
+
         binding.updateSaveButton.setOnClickListener{
             val newTitle = binding.updateTitleEditText.text.toString()
             val newContent = binding.updateContentEditText.text.toString()
-            val updateNote = Note(noteId,newTitle,newContent)
+            val newCategory = binding.updateContentEditText.text.toString()
+            val updateNote = Note(noteId,newTitle,newContent,newCategory)
             db.updateNote(updateNote)
             finish()
             Toast.makeText(this,"Change Saved",Toast.LENGTH_SHORT).show()
