@@ -10,45 +10,60 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class NotesAdapter(private var notes:List<Note>,context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+class NotesAdapter(private var notesList: List<Note>, private val context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
-    private  val db:NoteDatabaseHelper = NoteDatabaseHelper(context)
-    class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val titleTextView : TextView =itemView.findViewById(R.id.titleTextView)
-        val contentTextView:TextView = itemView.findViewById(R.id.contentTextView)
-        val updateButton:ImageView = itemView.findViewById(R.id.updateButton)
-        val deleteButton:ImageView = itemView.findViewById(R.id.deleteButton)
+    private val db: NoteDatabaseHelper = NoteDatabaseHelper(context)
+    private var fullNotesList = ArrayList(notesList) // Save the original list for filtering
+
+    class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
+        val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
+        val updateButton: ImageView = itemView.findViewById(R.id.updateButton)
+        val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.note_item,parent,false)
-        return  NoteViewHolder(view)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.note_item, parent, false)
+        return NoteViewHolder(view)
     }
 
-    override fun getItemCount(): Int = notes.size
+    override fun getItemCount(): Int = notesList.size
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        val note = notes[position]
-        holder.titleTextView.text=note.title
-        holder.contentTextView.text=note.content
+        val note = notesList[position]
+        holder.titleTextView.text = note.title
+        holder.contentTextView.text = note.content
 
-        holder.updateButton.setOnClickListener{
-            val intent=Intent(holder.itemView.context,UpdateNoteActivity::class.java).apply {
-                putExtra("note_id",note.id)
+        holder.updateButton.setOnClickListener {
+            val intent = Intent(holder.itemView.context, UpdateNoteActivity::class.java).apply {
+                putExtra("note_id", note.id)
             }
             holder.itemView.context.startActivity(intent)
         }
-        holder.deleteButton.setOnClickListener{
+
+        holder.deleteButton.setOnClickListener {
             db.deleteNote(note.id)
-            refreshData(db.getAllNotes())
-            Toast.makeText(holder.itemView.context,"Note Deleted",Toast.LENGTH_SHORT).show()
-
-
+            refreshData(db.getAllNotes()) // Refresh the list after deletion
+            Toast.makeText(holder.itemView.context, "Note Deleted", Toast.LENGTH_SHORT).show()
         }
-
     }
-    fun refreshData(newNote: List<Note>){
-        notes=newNote
+
+    fun refreshData(newNotes: List<Note>) {
+        notesList = newNotes
+        fullNotesList = ArrayList(newNotes) // Update the full list whenever data changes
         notifyDataSetChanged()
+    }
+
+    fun filter(query: String?) {
+        val filteredList = if (query.isNullOrEmpty()) {
+            fullNotesList // If no query, show all notes
+        } else {
+            fullNotesList.filter {
+                it.title.contains(query, ignoreCase = true) || // Filter by title
+                        it.content.contains(query, ignoreCase = true) // Filter by content
+            }
+        }
+        notesList = filteredList
+        notifyDataSetChanged() // Notify the adapter that data has changed
     }
 }
