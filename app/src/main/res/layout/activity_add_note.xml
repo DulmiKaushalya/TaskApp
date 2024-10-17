@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/notebackground"
     android:padding="16dp"
     tools:context=".AddNoteActivity">
 
@@ -14,50 +15,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/poppins"
-        android:text="Add Note."
-        android:textColor='@color/purple'
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/autour_one"
+        android:text="@string/AddNote"
+        android:textColor="@color/darkGreen"
         android:textSize="24sp" />
 
     <ImageView
         android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_done_24"
+        android:layout_width="38dp"
+        android:layout_height="28dp"
+        android:layout_alignTop="@id/addNoteHeading"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/addNoteHeading"
-        android:layout_marginEnd="6dp"/>
+        android:layout_marginEnd="3dp"
+        android:src="@drawable/checkbox" />
+
+    <ImageView
+        android:id="@+id/CancelButton"
+        android:layout_width="38dp"
+        android:layout_height="34dp"
+        android:layout_alignTop="@id/addNoteHeading"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-3dp"
+        android:layout_marginEnd="38dp"
+        android:src="@drawable/baseline_cancel_24" />
+
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="Enter the title"
+        android:hint="@string/enterTitle"
         android:padding="12dp"
         android:textSize="20sp"
-        android:layout_below="@+id/addNoteHeading"
-        android:background="@drawable/purple_border"
-        android:layout_marginTop="16dp"
+        android:layout_below="@id/addNoteHeading"
+        android:background="@drawable/title_border"
+        android:layout_marginTop="45dp"
         android:maxLines="1"
         android:fontFamily="@font/poppins"/>
-    <Spinner
-        android:id="@+id/categorySpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="135dp"
-        />
 
     <EditText
         android:id="@+id/contentEditText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="Enter the description"
-        android:gravity="top"
-        android:padding="12dp"
-        android:textSize="18sp"
+        android:layout_below="@id/titleEditText"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="160dp"
+        android:background="@drawable/blue_border"
         android:fontFamily="@font/poppins"
-        android:background="@drawable/purple_border"
-        android:layout_below="@+id/titleEditText"
-        android:layout_marginTop="30dp" />
+        android:gravity="top"
+        android:hint="@string/desc"
+        android:padding="12dp"
+        android:textSize="18sp" />
+
+
 
 </RelativeLayout>

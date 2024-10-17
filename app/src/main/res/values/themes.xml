@@ -2,10 +2,13 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TaskApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary"> @color/purple</item>
-        <item name="colorPrimaryVariant"> @color/purple</item>
-        <item name="android:statusBarColor"> @color/purple</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryVariant">#418C2D</item>
+        <item name="android:statusBarColor">@color/blue</item>
     </style>
 
-    <style name="Theme.TaskApp" parent="Base.Theme.TaskApp" />
+    <style name="Theme.TaskApp" parent="Base.Theme.TaskApp" >
+        <item name="android:statusBarColor">@color/blue</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
 </resources>

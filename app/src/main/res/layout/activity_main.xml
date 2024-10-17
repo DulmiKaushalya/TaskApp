@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/notebackground"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,42 +12,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/poppins"
-        android:text="Notes."
         android:layout_marginStart="18dp"
-        android:textColor="@color/purple"
-        android:textSize="24sp"/>
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/autour_one"
+        android:text="@string/notes"
+        android:textColor="@color/darkGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <!-- SearchView for searching notes -->
-    <androidx.appcompat.widget.SearchView
+    <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/blue_border"
+        android:layout_height="34dp"
+        android:layout_marginTop="10dp"
+        android:imeOptions="actionSearch"
         android:layout_below="@id/notesHeading"
-        android:layout_marginTop="8dp"
-        android:iconifiedByDefault="false"/>
+        android:inputType="text" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
         android:layout_below="@id/searchView"
-        android:layout_marginTop="8dp"
-        android:padding="16dp"/>
+        android:padding="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addButton"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="9dp"
         android:src="@drawable/baseline_add_24"
-        app:tint="@color/white"
-        android:backgroundTint="@color/purple"/>
+        android:tint="@color/white"
+        android:backgroundTint="@color/blue" />
 
 </RelativeLayout>
